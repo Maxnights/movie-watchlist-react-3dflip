@@ -1,3 +1,4 @@
+// src/components/Add.js
 import React, { useState } from "react";
 import { ResultCard } from "./ResultCard";
 
@@ -10,7 +11,7 @@ const SkeletonCard = () => (
 );
 
 export const Add = () => {
-  const [query, setQuery] = useState("");
+  const [query, setQuery]   = useState("");
   const [results, setResults] = useState([]);
   const [loading, setLoading] = useState(false);
 
@@ -18,15 +19,14 @@ export const Add = () => {
     const value = e.target.value;
     setQuery(value);
     setLoading(true);
-
     fetch(
       `https://api.themoviedb.org/3/search/movie?api_key=${
         process.env.REACT_APP_TMDB_KEY
-      }&language=en-US&page=1&include_adult=false&query=${encodeURIComponent(
-        value
-      )}`
+      }&language=en-US&page=1&include_adult=false&query=${
+        encodeURIComponent(value)
+      }`
     )
-      .then((res) => res.json())
+      .then((r) => r.json())
       .then((data) => {
         setResults(Array.isArray(data.results) ? data.results : []);
         setLoading(false);
