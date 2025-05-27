@@ -1,13 +1,11 @@
-// src/components/Add.js
 import React, { useState } from "react";
 import { ResultCard } from "./ResultCard";
 
-// Skeleton-заглушка для показа при загрузке
 const SkeletonCard = () => (
   <div className="skeleton-card">
-    <div className="skeleton-poster"></div>
-    <div className="skeleton-text-line short"></div>
-    <div className="skeleton-text-line long"></div>
+    <div className="skeleton-poster" />
+    <div className="skeleton-text-line short" />
+    <div className="skeleton-text-line long" />
   </div>
 );
 
@@ -41,7 +39,6 @@ export const Add = () => {
 
   return (
     <div className="add-page">
-      {/* Hero Banner с поиском */}
       <section className="search-hero">
         <div className="search-hero-bg" />
         <div className="search-hero-content container">
@@ -59,7 +56,6 @@ export const Add = () => {
         </div>
       </section>
 
-      {/* Результаты или Skeleton */}
       <div className="container">
         {loading ? (
           <div className="movie-grid">
@@ -67,7 +63,7 @@ export const Add = () => {
               <SkeletonCard key={i} />
             ))}
           </div>
-        ) : Array.isArray(results) && results.length > 0 ? (
+        ) : results.length > 0 ? (
           <ul className="results movie-grid">
             {results.map((movie) => (
               <li key={movie.id}>

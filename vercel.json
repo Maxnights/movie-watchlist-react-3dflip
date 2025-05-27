@@ -1,12 +1,6 @@
 {
-  "rewrites": [
-    {
-      "source": "/add",
-      "destination": "/"
-    },
-    {
-      "source": "/watched",
-      "destination": "/"
-    }
+  "routes": [
+    { "handle": "filesystem" },
+    { "src": "/(.*)", "dest": "/index.html" }
   ]
 }
