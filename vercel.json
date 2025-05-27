@@ -1,10 +1,12 @@
 {
-  "cleanUrls": true,
-  "trailingSlash": false,
   "rewrites": [
     {
-      "source": "/(.*)",
-      "destination": "/index.html"
+      "source": "/add",
+      "destination": "/"
+    },
+    {
+      "source": "/watched",
+      "destination": "/"
     }
   ]
 }
