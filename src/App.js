@@ -1,14 +1,14 @@
 // src/App.js
+import { ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 import React from "react";
 import {
-  HashRouter as Router,
+  BrowserRouter as Router,
   Switch,
   Route,
   useLocation,
 } from "react-router-dom";
 import { AnimatePresence, motion } from "framer-motion";
-import { ToastContainer } from "react-toastify";
-import "react-toastify/dist/ReactToastify.css";
 
 import { Header } from "./components/Header";
 import { Watchlist } from "./components/Watchlist";
@@ -21,24 +21,41 @@ import "./lib/font-awesome/css/all.min.css";
 
 function AnimatedRoutes() {
   const location = useLocation();
-
   return (
+    // exitBeforeEnter гарантирует, что текущая страница уйдёт до входа новой
     <AnimatePresence exitBeforeEnter>
-      {/* motion.div — ПРЯМОЙ потомок AnimatePresence */}
-      <motion.div
-        key={location.pathname} // ключ по пути
-        initial={{ opacity: 0, y: 10 }}
-        animate={{ opacity: 1, y: 0 }}
-        exit={{ opacity: 0, y: -10 }}
-        transition={{ duration: 0.3 }}
-      >
-        {/* внутри — привычный Switch/Route */}
-        <Switch location={location}>
-          <Route exact path="/" component={Watchlist} />
-          <Route path="/add" component={Add} />
-          <Route path="/watched" component={Watched} />
-        </Switch>
-      </motion.div>
+      <Switch location={location} key={location.pathname}>
+        <Route exact path="/">
+          <motion.div
+            initial={{ opacity: 0, y: 10 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0, y: -10 }}
+            transition={{ duration: 0.3 }}
+          >
+            <Watchlist />
+          </motion.div>
+        </Route>
+        <Route path="/add">
+          <motion.div
+            initial={{ opacity: 0, y: 10 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0, y: -10 }}
+            transition={{ duration: 0.3 }}
+          >
+            <Add />
+          </motion.div>
+        </Route>
+        <Route path="/watched">
+          <motion.div
+            initial={{ opacity: 0, y: 10 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0, y: -10 }}
+            transition={{ duration: 0.3 }}
+          >
+            <Watched />
+          </motion.div>
+        </Route>
+      </Switch>
     </AnimatePresence>
   );
 }
@@ -49,8 +66,8 @@ function App() {
       <Router>
         <Header />
         <ToastContainer
-          position="top-right"
-          autoClose={3000}
+          position="top-right" /* правый верхний угол */
+          autoClose={3000} /* время в мс */
           hideProgressBar={false}
           newestOnTop={false}
           closeOnClick
